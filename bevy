@@ -6,3 +6,11 @@ PALETTE_COLOR_GREEN='\033[0;32m'
 PALETTE_COLOR_NONE='\033[0m'
 
 declare -A ARRAY_FILTER_TYPE
+
+
+dir_create() {
+  if [ ! -d $1 ]; then
+    mkdir -p $1 && echo -e "${PALETTE_COLOR_GREEN}Created Directory: $1${PALETTE_COLOR_NONE}"
+  fi
+} && dir_create $DIR_OUTPUT
+
