@@ -19,11 +19,12 @@ util_dir_create() {
 
 
 util_shell_execute() {
-  for i in "${ARRAY_FILTER_RESULTS_GIT[@]}"; do
-    if [ "$1" = "git" ]; then
+  if [ "$1" = "git" ]; then
+    shift
+    for i in "$@"; do
       echo git clone "https://github.com/$i.git"
-    fi
-  done
+    done
+  fi
 }
 
 
@@ -43,5 +44,5 @@ config_parse() {
 
 
 config_array_filter_assign
-util_shell_execute "git"
+util_shell_execute "git" "${ARRAY_FILTER_RESULTS_GIT[@]}"
 #config_parse
