@@ -5,10 +5,10 @@ FILE_CONFIG=$HOME/.bevyrc
 PALETTE_COLOR_GREEN='\033[0;32m'
 PALETTE_COLOR_NONE='\033[0m'
 
-declare -A ARRAY_FILTER_TYPE
-declare -A ARRAY_FILTER_RESULTS_GIT
-declare -A ARRAY_FILTER_RESULTS_CURL
-ARRAY_FILTER_TYPE=$(sed -n -e '/^\[/p' $FILE_CONFIG)
+declare -a ARRAY_FILTER_RESULTS_GIT
+declare -a ARRAY_FILTER_RESULTS_CURL
+#declare -a ARRAY_FILTER_TYPE
+#ARRAY_FILTER_TYPE=($(sed -n -e '/^\[/p' $FILE_CONFIG | sed 's/[][]//g'))
 
 
 util_dir_create() {
@@ -18,12 +18,20 @@ util_dir_create() {
 } && util_dir_create $DIR_OUTPUT
 
 
-config_array_filter_assign() {
-  for i in $1; do
-    [ $i = "[git]" ]; ARRAY_FILTER_RESULTS_GIT=$(sed -n '/\[git\]/,/^$/{//!p;}' $FILE_CONFIG)
-    [ $i = "[curl]" ]; ARRAY_FILTER_RESULTS_CURL=$(sed -n '/\[curl\]/,/^$/{//!p;}' $FILE_CONFIG)
+util_shell_execute() {
+  for i in "${ARRAY_FILTER_RESULTS_GIT[@]}"; do
+    if [ "$1" = "git" ]; then
+      echo git clone "https://github.com/$i.git"
+    fi
   done
 }
+
+
+config_array_filter_assign() {
+  ARRAY_FILTER_RESULTS_GIT=($(sed -n '/\[git\]/,/^$/{//!p;}' $FILE_CONFIG))
+  ARRAY_FILTER_RESULTS_CURL=($(sed -n '/\[curl\]/,/^$/{//!p;}' $FILE_CONFIG))
+}
+
 
 config_parse() {
   if [ -e $FILE_CONFIG ]; then
@@ -34,6 +42,6 @@ config_parse() {
 }
 
 
-config_array_filter_assign $ARRAY_FILTER_TYPE
+config_array_filter_assign
+util_shell_execute "git"
 #config_parse
-
