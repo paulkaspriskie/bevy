@@ -6,9 +6,10 @@ PALETTE_COLOR_GREEN='\033[0;32m'
 PALETTE_COLOR_NONE='\033[0m'
 
 declare -A ARRAY_FILTER_TYPE
-declare -A ARRAY_FILTER_TYPE_RESULTS
+declare -A ARRAY_FILTER_RESULTS_GIT
+declare -A ARRAY_FILTER_RESULTS_CURL
 ARRAY_FILTER_TYPE=$(sed -n -e '/^\[/p' $FILE_CONFIG)
-ARRAY_FILTER_TYPE_RESULTS=$(sed -n '/\[git\]/,/^$/{//!p;}' $FILE_CONFIG)
+
 
 util_dir_create() {
   if [ ! -d $1 ]; then
@@ -16,6 +17,13 @@ util_dir_create() {
   fi
 } && util_dir_create $DIR_OUTPUT
 
+
+config_array_filter_assign() {
+  for i in $1; do
+    [ $i = "[git]" ]; ARRAY_FILTER_RESULTS_GIT=$(sed -n '/\[git\]/,/^$/{//!p;}' $FILE_CONFIG)
+    [ $i = "[curl]" ]; ARRAY_FILTER_RESULTS_CURL=$(sed -n '/\[curl\]/,/^$/{//!p;}' $FILE_CONFIG)
+  done
+}
 
 config_parse() {
   if [ -e $FILE_CONFIG ]; then
@@ -25,5 +33,7 @@ config_parse() {
   fi
 }
 
-config_parse
+
+config_array_filter_assign $ARRAY_FILTER_TYPE
+#config_parse
 
