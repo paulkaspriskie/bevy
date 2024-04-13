@@ -9,13 +9,12 @@ declare -A ARRAY_FILTER_TYPE
 declare -A ARRAY_FILTER_TYPE_RESULTS
 ARRAY_FILTER_TYPE=$(sed -n -e '/^\[/p' $FILE_CONFIG)
 ARRAY_FILTER_TYPE_RESULTS=$(sed -n '/\[git\]/,/^$/{//!p;}' $FILE_CONFIG)
-echo $ARRAY_FILTER_TYPE_RESULTS
 
-dir_create() {
+util_dir_create() {
   if [ ! -d $1 ]; then
     mkdir -p $1 && echo -e "${PALETTE_COLOR_GREEN}Created Directory: $1${PALETTE_COLOR_NONE}"
   fi
-} && dir_create $DIR_OUTPUT
+} && util_dir_create $DIR_OUTPUT
 
 
 config_parse() {
