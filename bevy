@@ -8,7 +8,7 @@ PALETTE_COLOR_NONE='\033[0m'
 
 util_dir_create() {
   if [ ! -d $1 ]; then
-    mkdir -p $1 && echo -e "${PALETTE_COLOR_GREEN}Created Directory: $1${PALETTE_COLOR_NONE}"
+    mkdir -p $1 && echo "${PALETTE_COLOR_GREEN}Created Directory: $1${PALETTE_COLOR_NONE}"
   fi
 }
 
