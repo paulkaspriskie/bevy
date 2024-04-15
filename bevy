@@ -10,17 +10,17 @@ util_dir_create() {
   if [ ! -d $1 ]; then
     mkdir -p $1 && echo -e "${PALETTE_COLOR_GREEN}Created Directory: $1${PALETTE_COLOR_NONE}"
   fi
-} && util_dir_create $DIR_OUTPUT
+}
 
 
 util_shell_execute() {
-  if [ "$1" = "git" ]; then
-    shift
-    for i in "$@"; do
-      echo git clone "https://github.com/$i.git"
-      echo "hello ${i}"
-    done
-  fi
+  TYPE=$1; shift
+
+  for i in "$@"; do
+    if [ $TYPE = "git" ]; then
+     echo git clone "https://github.com/$i.git"
+    fi
+  done
 }
 
 
@@ -31,11 +31,10 @@ config_array_filter_assign() {
     case $i in
       "git")
         ARRAY_TYPE_RESULTS_GIT=$(sed -n '/\[git\]/,/^$/{//!p;}' $FILE_CONFIG)
-        echo $ARRAY_TYPE_RESULTS_GIT
+        util_shell_execute $i $ARRAY_TYPE_RESULTS_GIT
         ;;
       "curl")
         ARRAY_TYPE_RESULTS_CURL=$(sed -n '/\[curl\]/,/^$/{//!p;}' $FILE_CONFIG)
-        echo $ARRAY_TYPE_RESULTS_CURL
         ;;
       *)
         echo "Ooops, something went wrong!"
