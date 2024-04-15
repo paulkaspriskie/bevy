@@ -20,12 +20,17 @@ util_dir_update() {
 }
 
 
+util_clone_build() {
+  git clone "https://github.com/$1.git" && echo "${PALETTE_COLOR_GREEN}Clone Success: $1${PALETTE_COLOR_NONE}"
+}
+
+
 util_shell_execute() {
   TYPE=$1; shift
 
   for i in "$@"; do
     if [ $TYPE = "git" ]; then
-      util_dir_create $DIR_OUTPUT && util_dir_update $DIR_OUTPUT && git clone "https://github.com/$i.git"
+      util_dir_create $DIR_OUTPUT && util_dir_update $DIR_OUTPUT && util_clone_build $i
     fi
   done
 }
