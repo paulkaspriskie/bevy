@@ -13,12 +13,19 @@ util_dir_create() {
 }
 
 
+util_dir_update() {
+  if [ $PWD != $1 ]; then
+    cd $1 && echo "${PALETTE_COLOR_GREEN}Changing Directory: $1${PALETTE_COLOR_NONE}"
+  fi
+}
+
+
 util_shell_execute() {
   TYPE=$1; shift
 
   for i in "$@"; do
     if [ $TYPE = "git" ]; then
-     echo git clone "https://github.com/$i.git"
+      util_dir_create $DIR_OUTPUT && util_dir_update $DIR_OUTPUT && git clone "https://github.com/$i.git"
     fi
   done
 }
@@ -35,9 +42,7 @@ config_array_filter_assign() {
         ;;
       "curl")
         ARRAY_TYPE_RESULTS_CURL=$(sed -n '/\[curl\]/,/^$/{//!p;}' $FILE_CONFIG)
-        ;;
-      *)
-        echo "Ooops, something went wrong!"
+        util_shell_execute $i $ARRAY_TYPE_RESULTS_CURL
         ;;
     esac
   done
