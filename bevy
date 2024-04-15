@@ -2,26 +2,26 @@
 
 DIR_OUTPUT=$HOME/.bevy
 FILE_CONFIG=$HOME/.bevyrc
-PALETTE_COLOR_GREEN='\033[0;32m'
-PALETTE_COLOR_NONE='\033[0m'
+TERMINAL_COLOR_GREEN='\033[0;32m'
+TERMINAL_COLOR_NONE='\033[0m'
 
 
 util_dir_create() {
   if [ ! -d $1 ]; then
-    mkdir -p $1 && echo "${PALETTE_COLOR_GREEN}Created Directory: $1${PALETTE_COLOR_NONE}"
+    mkdir -p $1 && echo "${TERMINAL_COLOR_GREEN}Created Directory: $1${TERMINAL_COLOR_NONE}"
   fi
 }
 
 
 util_dir_update() {
   if [ $PWD != $1 ]; then
-    cd $1 && echo "${PALETTE_COLOR_GREEN}Changing Directory: $1${PALETTE_COLOR_NONE}"
+    cd $1 && echo "${TERMINAL_COLOR_GREEN}Changing Directory: $1${TERMINAL_COLOR_NONE}"
   fi
 }
 
 
 util_clone_build() {
-  git clone "https://github.com/$1.git" && echo "${PALETTE_COLOR_GREEN}Clone Success: $1${PALETTE_COLOR_NONE}"
+  git clone "https://github.com/$1.git" && echo "${TERMINAL_COLOR_GREEN}Clone Success: $1${TERMINAL_COLOR_NONE}"
 }
 
 
@@ -51,11 +51,6 @@ config_array_filter_assign() {
         ;;
     esac
   done
-}
-
-
-env_process_init() {
-  echo "test"
 }
 
 
