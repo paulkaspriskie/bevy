@@ -28,10 +28,19 @@ config_array_filter_assign() {
   ARRAY_FILTER_TYPE=$(sed -n -e '/^\[/p' $FILE_CONFIG | sed 's/[][]//g')
 
   for i in $ARRAY_FILTER_TYPE; do
-    if [ $i = "git" ]; then
-      ARRAY_TYPE_RESULTS_GIT=$(sed -n '/\[git\]/,/^$/{//!p;}' $FILE_CONFIG)
-      echo $ARRAY_TYPE_RESULTS_GIT
-    fi
+    case $i in
+      "git")
+        ARRAY_TYPE_RESULTS_GIT=$(sed -n '/\[git\]/,/^$/{//!p;}' $FILE_CONFIG)
+        echo $ARRAY_TYPE_RESULTS_GIT
+        ;;
+      "curl")
+        ARRAY_TYPE_RESULTS_CURL=$(sed -n '/\[curl\]/,/^$/{//!p;}' $FILE_CONFIG)
+        echo $ARRAY_TYPE_RESULTS_CURL
+        ;;
+      *)
+        echo "Ooops, something went wrong!"
+        ;;
+    esac
   done
 }
 
