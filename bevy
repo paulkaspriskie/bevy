@@ -1,11 +1,26 @@
 #!/bin/sh
 
+
+# --------------------
+# Global Declarations
+# --------------------
+# DIR_OUTPUT - Output directory that curl | git writes to.
+# FILE_CONFIG - File that contains git repos to clone and curl commands to execute.
+# TERMINAL_COLOR_GREEN - Success color green that prints/echos in terminal.
+# TERMINAL_COLOR_NONE - Default shell color, used to default terminal foreground color.
+#
 DIR_OUTPUT=$HOME/.bevy
 FILE_CONFIG=$HOME/.bevyrc
 TERMINAL_COLOR_GREEN='\033[0;32m'
 TERMINAL_COLOR_NONE='\033[0m'
 
 
+# --------------------------
+# @function util_dir_create
+# --------------------------
+# @param $1 - respresents a directory name.
+# @description - creates directory if one does not exsist.
+#
 util_dir_create() {
   if [ ! -d $1 ]; then
     mkdir -p $1 && echo "${TERMINAL_COLOR_GREEN}Created Directory: $1${TERMINAL_COLOR_NONE}"
@@ -13,6 +28,12 @@ util_dir_create() {
 }
 
 
+# --------------------------
+# @function util_dir_update
+# --------------------------
+# @param $1 - represents a directory path.
+# @description - changes directory to one specified by the first argument.
+#
 util_dir_update() {
   if [ $PWD != $1 ]; then
     cd $1 && echo "${TERMINAL_COLOR_GREEN}Changing Directory: $1${TERMINAL_COLOR_NONE}"
@@ -20,11 +41,23 @@ util_dir_update() {
 }
 
 
+# ---------------------------
+# @function util_clone_build
+# ---------------------------
+# @param $1 - represents git repo name/project.
+# @description - dynamically builds git clone specified by first argument.
+#
 util_clone_build() {
   git clone "https://github.com/$1.git" && echo "${TERMINAL_COLOR_GREEN}Clone Success: $1${TERMINAL_COLOR_NONE}"
 }
 
 
+# -----------------------------
+# @function util_shell_execute
+# -----------------------------
+# @param $1 - represents array type. (git or curl)
+# @param $@ - array containing git addresses and/or curl commands.
+#
 util_shell_execute() {
   TYPE=$1; shift
 
@@ -36,6 +69,14 @@ util_shell_execute() {
 }
 
 
+# -------------------------------------
+# @function config_array_filter_assign
+# -------------------------------------
+# ARRAY_FILTER_TYPE - array of types present in config file.
+# ARRAY_FILTER_RESULTS_GIT - array that contains git addresses.
+# ARRAY_FILTER_RESULTS_CURL - array that contains curl commands.
+# @description - filters and assigns git addresses and/or curl commands to corresponding arrays.
+#
 config_array_filter_assign() {
   ARRAY_FILTER_TYPE=$(sed -n -e '/^\[/p' $FILE_CONFIG | sed 's/[][]//g')
 
