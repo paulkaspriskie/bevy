@@ -1,6 +1,4 @@
 #!/bin/sh
-
-
 # --------------------
 # Global Declarations
 # --------------------
@@ -9,6 +7,8 @@
 # TERMINAL_COLOR_GREEN - Success color green that prints/echos in terminal.
 # TERMINAL_COLOR_NONE - Default shell color, used to default terminal foreground color.
 #
+CLI_ARG_CMD_TYPE=$1
+CLI_ARG_CMD_OPT=$2
 DIR_OUTPUT=$HOME/.bevy
 FILE_CONFIG=$HOME/.bevyrc
 TERMINAL_COLOR_GREEN='\033[0;32m'
@@ -82,11 +82,11 @@ config_array_filter_assign() {
 
   for i in $ARRAY_FILTER_TYPE; do
     case $i in
-      "git")
+      git)
         ARRAY_TYPE_RESULTS_GIT=$(sed -n '/\[git\]/,/^$/{//!p;}' $FILE_CONFIG)
         util_shell_execute $i $ARRAY_TYPE_RESULTS_GIT
         ;;
-      "curl")
+      curl)
         ARRAY_TYPE_RESULTS_CURL=$(sed -n '/\[curl\]/,/^$/{//!p;}' $FILE_CONFIG)
         util_shell_execute $i $ARRAY_TYPE_RESULTS_CURL
         ;;
@@ -95,4 +95,26 @@ config_array_filter_assign() {
 }
 
 
-config_array_filter_assign
+# --------------------------
+# @function env_process_cli
+# --------------------------
+# @param $1 - represents command type: init | install | help
+# @param $2 - represents command option(s)
+# @description - case statement that manages cli commands and command options.
+#
+env_process_cli() {
+  case $1 in
+    init)
+      echo "command:$1 option:$2"
+      ;;
+    install)
+      echo "command:$1 option:$2"
+      #config_array_filter_assign
+      ;;
+    help | --help | h)
+      echo "$1"
+      ;;
+  esac
+}
+
+env_process_cli $CLI_ARG_CMD_TYPE $CLI_ARG_CMD_OPT
