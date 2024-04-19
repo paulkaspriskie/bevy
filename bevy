@@ -69,6 +69,21 @@ util_shell_execute() {
 }
 
 
+# ------------------------------
+# @function cli_input_menu_help
+# ------------------------------
+# @description - echos help menu including all cli commands.
+#
+cli_input_menu_help() {
+  echo "Bevy: A simple shell/vim plugin installation script manager."
+  echo
+  echo "Usage:"
+  echo "bevy init       creates .bevyrc file and related environment related setup"
+  echo "bevy install    installs all scripts specified in .bevyrc"
+  echo "bevy upgrade    upgrades all scripts specified in .bevyrc"
+}
+
+
 # -------------------------------------
 # @function config_array_filter_assign
 # -------------------------------------
@@ -111,7 +126,7 @@ env_process_cli() {
       config_array_filter_assign
       ;;
     help | --help | h)
-      echo "$1"
+      cli_input_menu_help
       ;;
     upgrade)
       echo "$1"
