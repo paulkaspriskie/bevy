@@ -108,10 +108,12 @@ env_process_cli() {
       echo "command:$1 option:$2"
       ;;
     install)
-      echo "command:$1 option:$2"
-      #config_array_filter_assign
+      config_array_filter_assign
       ;;
     help | --help | h)
+      echo "$1"
+      ;;
+    upgrade)
       echo "$1"
       ;;
   esac
