@@ -69,6 +69,23 @@ util_shell_execute() {
 }
 
 
+# ----------------------------------
+# @fucntion cli_create_input_prompt
+# ----------------------------------
+# @description - creates cli prompt, captures input and checks if it meets condition.
+#
+cli_create_input_prompt() {
+  while true; do
+    read -p "No .bevyrc file detected in $HOME directory, would you like to create one? [yes/no]: " yn
+    case $yn in
+      [Yy]*) echo "do something"; break;;
+      [Nn]*) exit;;
+      *) echo "please answer yes or no.";;
+    esac
+  done
+}
+
+
 # ------------------------------
 # @function cli_input_menu_help
 # ------------------------------
@@ -120,7 +137,7 @@ config_array_filter_assign() {
 env_process_cli() {
   case $1 in
     init)
-      echo "command:$1 option:$2"
+      cli_create_input_prompt
       ;;
     install)
       config_array_filter_assign
