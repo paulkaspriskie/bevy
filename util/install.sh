@@ -1,6 +1,9 @@
 #!/bin/sh
 
 DIR_PATH=/usr/local/bin
+EXE_NAME="bevy"
+URL="https://raw.githubusercontent.com/paulkaspriskie/bevy/main/bevy"
+
 
 if [ ! -d "$DIR_PATH" ]; then
   mkdir -p $DIR_PATH
@@ -17,4 +20,6 @@ else
   echo "Directory '$DIR_PATH' is already in your PATH. Skipping addition..."
 fi
 
-sudo curl -o /usr/local/bin/bevy https://raw.githubusercontent.com/paulkaspriskie/bevy/main/bevy && sudo chmod +x /usr/local/bin/bevy
+
+sudo curl -L -o "$DIR_PATH/bevy" "$URL" && sudo chmod +x "$DIR_PATH/bevy"
+echo "Installation successful! You can now run '$EXE_NAME' from your command line."
