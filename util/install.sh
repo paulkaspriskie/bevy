@@ -23,13 +23,11 @@ fi
 
 if [ ! -f "$DIR_PATH/$EXE_NAME" ]; then
   sudo curl -L -o "$DIR_PATH/$EXE_NAME" "$URL" && sudo chmod +x "$DIR_PATH/$EXE_NAME"
+  if [ $? -eq 0 ]; then
+    echo "Installation successful! You can now run '$EXE_NAME' from your command line."
+  else
+    echo "Ooops, something went wrong. Please check your network connection and try again."
+  fi
 else
   echo "$EXE_NAME already exists in /usr/local/bin/"
-fi
-
-
-if [ $? -eq 0 ]; then
-  echo "Installation successful! You can now run '$EXE_NAME' from your command line."
-else
-  echo "Ooops, something went wrong. Please check your network connection and try again."
 fi
