@@ -22,4 +22,10 @@ fi
 
 
 sudo curl -L -o "$DIR_PATH/bevy" "$URL" && sudo chmod +x "$DIR_PATH/bevy"
-echo "Installation successful! You can now run '$EXE_NAME' from your command line."
+
+
+if [ $? -eq 0 ]; then
+  echo "Installation successful! You can now run '$EXE_NAME' from your command line."
+else
+  echo "Ooops, something went wrong. Please check your network connection and try again."
+fi
