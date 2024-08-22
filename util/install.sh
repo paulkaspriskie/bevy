@@ -1,8 +1,8 @@
 #!/bin/sh
 
 DIR_PATH=/usr/local/bin
-EXE_NAME="bevy"
-URL="https://raw.githubusercontent.com/paulkaspriskie/bevy/main/bevy"
+EXE_NAME=bevy
+URL=https://raw.githubusercontent.com/paulkaspriskie/bevy/main/bevy
 
 
 if [ ! -d "$DIR_PATH" ]; then
@@ -21,7 +21,11 @@ else
 fi
 
 
-sudo curl -L -o "$DIR_PATH/bevy" "$URL" && sudo chmod +x "$DIR_PATH/bevy"
+if [ ! -f "$DIR_PATH/$EXE_NAME" ]; then
+  sudo curl -L -o "$DIR_PATH/$EXE_NAME" "$URL" && sudo chmod +x "$DIR_PATH/$EXE_NAME"
+else
+  echo "$EXE_NAME already exists in /usr/local/bin/"
+fi
 
 
 if [ $? -eq 0 ]; then
