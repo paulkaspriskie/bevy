@@ -55,6 +55,20 @@ util_clone_build() {
 }
 
 
+# --------------------------
+# @function util_dir_create
+# --------------------------
+# @param $1 - respresents a file name.
+# @description - creates file if it does not exsist.
+#
+util_file_create() {
+  if [ ! -f $1 ]; then
+    touch $1
+    echo "${TERMINAL_COLOR_GREEN}Created File: $1${TERMINAL_COLOR_NONE}"
+  fi
+}
+
+
 # -----------------------------
 # @function util_shell_execute
 # -----------------------------
