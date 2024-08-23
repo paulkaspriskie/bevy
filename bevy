@@ -65,6 +65,8 @@ util_file_create() {
   if [ ! -f $1 ]; then
     touch $1
     echo "${TERMINAL_COLOR_GREEN}Created File: $1${TERMINAL_COLOR_NONE}"
+  else
+    echo "File: $1 already exists. Skipping creation..."
   fi
 }
 
@@ -95,7 +97,7 @@ cli_create_input_prompt() {
   while true; do
     read -p "No .bevyrc file detected in $HOME directory, would you like to create one? [yes/no]: " yn
     case $yn in
-      [Yy]*) echo "do something"; break;;
+      [Yy]*) util_file_create $FILE_CONFIG; break;;
       [Nn]*) exit;;
       *) echo "please answer yes or no.";;
     esac
