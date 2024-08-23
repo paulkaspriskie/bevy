@@ -55,9 +55,9 @@ util_clone_build() {
 }
 
 
-# --------------------------
-# @function util_dir_create
-# --------------------------
+# ---------------------------
+# @function util_file_create
+# ---------------------------
 # @param $1 - respresents a file name.
 # @description - creates file if it does not exsist.
 #
@@ -68,6 +68,21 @@ util_file_create() {
   else
     echo "File: $1 already exists. Skipping creation..."
   fi
+}
+
+
+# ------------------------------
+# @function util_update_package
+# ------------------------------
+# @param $1 - path to directory that looped through performs git pull on.
+# @description - loops through start/opt directories, cd into sub-directories and performs git pull on each.
+#
+util_update_package() {
+  for SUBDIR in "$1"/*; do
+    if [ -d "$SUBDIR" ]; then
+      cd "$SUBDIR" && git pull && cd ..
+    fi
+  done
 }
 
 
