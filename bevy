@@ -10,6 +10,8 @@
 CLI_ARG_CMD_TYPE=$1
 CLI_ARG_CMD_OPT=$2
 DIR_OUTPUT=$HOME/.bevy
+DIR_VIM_START="$HOME/.vim/pack/plugins/start"
+DIR_VIM_OPT="$HOME/.vim/pack/plugins/opt"
 FILE_CONFIG=$HOME/.bevyrc
 TERMINAL_COLOR_GREEN='\033[0;32m'
 TERMINAL_COLOR_NONE='\033[0m'
