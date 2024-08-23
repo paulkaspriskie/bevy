@@ -16,7 +16,6 @@ FILE_CONFIG=$HOME/.bevyrc
 TERMINAL_COLOR_GREEN='\033[0;32m'
 TERMINAL_COLOR_NONE='\033[0m'
 
-echo $DIR_VIM_START
 
 # --------------------------
 # @function util_dir_create
@@ -180,7 +179,7 @@ env_process_cli() {
       cli_input_menu_help
       ;;
     upgrade)
-      echo "$1"
+      util_update_package "$DIR_OUTPUT"
       ;;
   esac
 }
