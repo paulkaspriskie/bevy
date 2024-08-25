@@ -9,9 +9,10 @@
 #
 CLI_ARG_CMD_TYPE=$1
 CLI_ARG_CMD_OPT=$2
+CLI_ARG_CMD_DIR=$3
 DIR_OUTPUT=$HOME/.bevy
-DIR_VIM_START="$HOME/.vim/pack/${CLI_ARG_CMD_TYPE:-plugins}/start"
-DIR_VIM_OPT="$HOME/.vim/pack/${CLI_ARG_CMD_TYPE:-plugins}/opt"
+DIR_VIM_START="$HOME/.bevy/pack/${CLI_ARG_CMD_DIR:-plugins}/start"
+DIR_VIM_OPT="$HOME/.bevy/pack/${CLI_ARG_CMD_DIR:-plugins}/opt"
 FILE_CONFIG=$HOME/.bevyrc
 TERMINAL_COLOR_GREEN='\033[0;32m'
 TERMINAL_COLOR_NONE='\033[0m'
@@ -95,8 +96,11 @@ util_shell_execute() {
   TYPE=$1; shift
 
   for i in "$@"; do
-    if [ $TYPE = "git" ]; then
-      util_dir_create $DIR_OUTPUT && util_dir_update $DIR_OUTPUT && util_clone_build $i
+    if [ $TYPE = "start" ]; then
+      util_dir_create $DIR_VIM_START && util_dir_update $DIR_VIM_START && util_clone_build $i
+    fi
+    if [ $TYPE = "opt" ]; then
+      util_dir_create $DIR_VIM_OPT && util_dir_update $DIR_VIM_OPT && util_clone_build $i
     fi
   done
 }
@@ -147,13 +151,13 @@ config_array_filter_assign() {
 
   for i in $ARRAY_FILTER_TYPE; do
     case $i in
-      git)
-        ARRAY_TYPE_RESULTS_GIT=$(sed -n '/\[git\]/,/^$/{//!p;}' $FILE_CONFIG)
-        util_shell_execute $i $ARRAY_TYPE_RESULTS_GIT
+      start)
+        ARRAY_TYPE_VIM_START=$(sed -n '/\[start\]/,/^$/{//!p;}' $FILE_CONFIG)
+        util_shell_execute $i $ARRAY_TYPE_VIM_START
         ;;
-      curl)
-        ARRAY_TYPE_RESULTS_CURL=$(sed -n '/\[curl\]/,/^$/{//!p;}' $FILE_CONFIG)
-        util_shell_execute $i $ARRAY_TYPE_RESULTS_CURL
+      opt)
+        ARRAY_TYPE_VIM_OPT=$(sed -n '/\[opt\]/,/^$/{//!p;}' $FILE_CONFIG)
+        util_shell_execute $i $ARRAY_TYPE_VIM_OPT
         ;;
     esac
   done
