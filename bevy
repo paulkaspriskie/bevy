@@ -142,9 +142,9 @@ cli_input_menu_help() {
 # @function config_array_filter_assign
 # -------------------------------------
 # ARRAY_FILTER_TYPE - array of types present in config file.
-# ARRAY_FILTER_RESULTS_GIT - array that contains git addresses.
-# ARRAY_FILTER_RESULTS_CURL - array that contains curl commands.
-# @description - filters and assigns git addresses and/or curl commands to corresponding arrays.
+# ARRAY_TYPE_VIM_START - array of vim plugin names to be installed in ~/.vim/pack/plugins/start.
+# ARRAY_TYPE_VIM_OPT - array of vim plugin names to be installed in ~/.vim/pack/plugins/opt.
+# @description - filters and assigns plugin names from .bevy file to corresponding start | opt arrays.
 #
 config_array_filter_assign() {
   ARRAY_FILTER_TYPE=$(sed -n -e '/^\[/p' $FILE_CONFIG | sed 's/[][]//g')
