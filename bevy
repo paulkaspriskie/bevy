@@ -89,8 +89,10 @@ util_update_package() {
 # -----------------------------
 # @function util_shell_execute
 # -----------------------------
-# @param $1 - represents array type. (git or curl)
-# @param $@ - array containing git addresses and/or curl commands.
+# @param $1 - represents array type, start or opt.
+# @param $@ - array containing vim start | opt plugin names.
+# @description - creates start or opt directory within .vim/pack/plugins/,
+#                changes (cd) into start | opt directories and performs a git clone of each plugin specified within start/opt array.
 #
 util_shell_execute() {
   TYPE=$1; shift
