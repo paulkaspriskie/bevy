@@ -74,13 +74,16 @@ util_file_create() {
 # ------------------------------
 # @function util_update_package
 # ------------------------------
-# @param $1 - path to directory that looped through performs git pull on.
-# @description - loops through start/opt directories, cd into sub-directories and performs git pull on each.
+# @param $1 - represents path to plugins directory.
+# @description - finds all nested sub-directories within plugins folder (start & opt),
+#                then loops through each sub-directory and performs git pull if sub-directory item is a directory.
 #
 util_update_package() {
-  for SUBDIR in "$1"/*; do
-    if [ -d "$SUBDIR" ]; then
-      cd "$SUBDIR" && git pull && cd ..
+  for DIR in "$1"/*; do
+    if [ -d $DIR ]; then
+      for SUBDIR in "$DIR"/*; do
+        cd "$SUBDIR" && git pull && cd ..
+      done
     fi
   done
 }
@@ -185,7 +188,7 @@ env_process_cli() {
       cli_input_menu_help
       ;;
     upgrade)
-      util_update_package "$DIR_OUTPUT"
+      util_update_package "$HOME/.bevy/pack/plugins"
       ;;
   esac
 }
