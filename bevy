@@ -72,6 +72,19 @@ util_file_create() {
 
 
 # ------------------------------
+# @function util_prune_package
+# ------------------------------
+# @param $1 - represents path to pack directory.
+# @description
+#
+util_prune_package() {
+  for DIR_PACK in "$1"/*; do
+    echo "$DIR_PACK"
+  done
+}
+
+
+# ------------------------------
 # @function util_update_package
 # ------------------------------
 # @param $1 - represents path to plugins directory.
@@ -186,6 +199,9 @@ env_process_cli() {
       ;;
     help | --help | h)
       cli_input_menu_help
+      ;;
+    prune)
+      util_prune_package "$HOME/.bevy/pack"
       ;;
     upgrade)
       util_update_package "$HOME/.bevy/pack/plugins"
