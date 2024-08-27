@@ -80,7 +80,7 @@ util_file_create() {
 util_get_plugin_dir() {
   find "$1" -type d | while read -r dir; do
     base=$(basename "${dir}")
-    if [ "$base" = "start" ] || [ "$base" = "opt" ]; then
+    if [ "$base" = "start" ] && [ "$2" = "prune" ] || [ "$base" = "opt" ] && [ "$2" = "prune" ]; then
       echo $dir
     fi
   done
@@ -225,7 +225,7 @@ env_process_cli() {
       cli_input_menu_help
       ;;
     prune)
-      util_get_plugin_dir "$HOME/.bevy/pack"
+      util_get_plugin_dir "$HOME/.bevy/pack" "$1"
       ;;
     upgrade)
       util_update_package "$HOME/.bevy/pack/plugins"
