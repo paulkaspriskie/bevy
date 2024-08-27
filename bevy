@@ -72,6 +72,22 @@ util_file_create() {
 
 
 # ------------------------------
+# @function util_get_plugin_dir
+# ------------------------------
+# @param $1 - represents path to pack directory.
+# @description
+#
+util_get_plugin_dir() {
+  find "$1" -type d | while read -r dir; do
+    base=$(basename "${dir}")
+    if [ "$base" = "start" ] || [ "$base" = "opt" ]; then
+      echo $dir
+    fi
+  done
+}
+
+
+# ------------------------------
 # @function util_prune_package
 # ------------------------------
 # @param $1 - represents path to pack directory.
@@ -209,7 +225,7 @@ env_process_cli() {
       cli_input_menu_help
       ;;
     prune)
-      util_prune_package "$HOME/.bevy/pack"
+      util_get_plugin_dir "$HOME/.bevy/pack"
       ;;
     upgrade)
       util_update_package "$HOME/.bevy/pack/plugins"
