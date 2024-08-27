@@ -79,7 +79,15 @@ util_file_create() {
 #
 util_prune_package() {
   for DIR_PACK in "$1"/*; do
-    echo "$DIR_PACK"
+    if [ -d $DIR_PACK ]; then
+    for DIR_CATEGORY in "$DIR_PACK"/*; do
+      if [ -d $DIR_CATEGORY ]; then
+        for DIR_PLUGIN in "$DIR_CATEGORY"/*; do
+          echo "$DIR_PLUGIN"
+        done
+      fi
+    done
+    fi
   done
 }
 
