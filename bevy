@@ -83,6 +83,9 @@ util_get_plugin_dir() {
     if [ "$base" = "start" ] && [ "$2" = "prune" ] || [ "$base" = "opt" ] && [ "$2" = "prune" ]; then
       echo $dir
     fi
+    if [ "$base" = "start" ] && [ "$2" = "upgrade" ] || [ "$base" = "opt" ] && [ "$2" = "upgrade" ]; then
+      echo $dir
+    fi
   done
 }
 
@@ -228,7 +231,7 @@ env_process_cli() {
       util_get_plugin_dir "$HOME/.bevy/pack" "$1"
       ;;
     upgrade)
-      util_update_package "$HOME/.bevy/pack/plugins"
+      util_get_plugin_dir "$HOME/.bevy/pack/plugins" "$1"
       ;;
   esac
 }
