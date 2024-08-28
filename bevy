@@ -97,15 +97,9 @@ util_get_plugin_dir() {
 # @description
 #
 util_prune_package() {
-  for DIR_PACK in "$1"/*; do
-    if [ -d $DIR_PACK ]; then
-    for DIR_CATEGORY in "$DIR_PACK"/*; do
-      if [ -d $DIR_CATEGORY ]; then
-        for DIR_PLUGIN in "$DIR_CATEGORY"/*; do
-          echo "$DIR_PLUGIN"
-        done
-      fi
-    done
+  for DIR_PLUGIN in "$1"/*; do
+    if [ -d $DIR_PLUGIN ]; then
+      echo "$DIR_PLUGIN"
     fi
   done
 }
@@ -226,10 +220,10 @@ env_process_cli() {
       cli_input_menu_help
       ;;
     prune)
-      util_get_plugin_dir "$HOME/.bevy/pack" "$1"
+      util_get_plugin_dir "$HOME/.bevy/pack/" "$1"
       ;;
     upgrade)
-      util_get_plugin_dir "$HOME/.bevy/pack/plugins" "$1"
+      util_get_plugin_dir "$HOME/.bevy/pack/" "$1"
       ;;
   esac
 }
