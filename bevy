@@ -84,7 +84,7 @@ util_get_plugin_dir() {
       echo $dir
     fi
     if [ "$base" = "start" ] && [ "$2" = "upgrade" ] || [ "$base" = "opt" ] && [ "$2" = "upgrade" ]; then
-      echo $dir
+      util_update_package $dir
     fi
   done
 }
@@ -119,11 +119,9 @@ util_prune_package() {
 #                then loops through each sub-directory and performs git pull if sub-directory item is a directory.
 #
 util_update_package() {
-  for DIR in "$1"/*; do
-    if [ -d $DIR ]; then
-      for SUBDIR in "$DIR"/*; do
-        cd "$SUBDIR" && git pull && cd ..
-      done
+  for DIR_PLUGIN in "$1"/*; do
+    if [ -d $DIR_PLUGIN ]; then
+      cd "$DIR_PLUGIN" && git pull && cd ..
     fi
   done
 }
