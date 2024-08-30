@@ -1,5 +1,5 @@
 # Bevy
-A shell based bulk installer and manager for vim and shell plugins.
+A shell based vim plugin manager and bulk installer (CLI).
 - [Installation](#installation)
 - [Basic Usage](#basic-cli-usage)
 
@@ -27,12 +27,18 @@ bevy init
 ```shell 
 bevy install
 ```
-> installs all libraries specified in .bevyrc file.
+> installs all vim plugins specified in .bevyrc file.
 
 <br/>
+
+### Bevy prune
+```shell 
+bevy prune
+```
+> removes any vim plugins that are no longer specified in .bevyrc file.
 
 ### Bevy upgrade
 ```shell 
 bevy upgrade
 ```
-> upgrades all libraries specified in .bevyrc file.
+> upgrades all vim plugins specified in .bevyrc file.
