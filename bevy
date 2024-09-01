@@ -2,8 +2,10 @@
 # --------------------
 # Global Declarations
 # --------------------
-# DIR_OUTPUT - Output directory that curl | git writes to.
-# FILE_CONFIG - File that contains git repos to clone and curl commands to execute.
+# DIR_OUTPUT - Output directory that vim plugins get written to.
+# CLI_ARG_CMD_TYPE - Represents command type, init | install | help | prune | upgrade
+# CLI_ARG_CMD_OPT - Represents command options.
+# FILE_CONFIG - File that contains vim plugin names to be installed.
 # TERMINAL_COLOR_GREEN - Success color green that prints/echos in terminal.
 # TERMINAL_COLOR_NONE - Default shell color, used to default terminal foreground color.
 #
@@ -22,7 +24,7 @@ TERMINAL_COLOR_NONE='\033[0m'
 # @function util_dir_create
 # --------------------------
 # @param $1 - respresents a directory name.
-# @description - creates directory if one does not exsist.
+# @description - creates directory if one does not exists.
 #
 util_dir_create() {
   if [ ! -d $1 ]; then
@@ -59,7 +61,7 @@ util_clone_build() {
 # @function util_file_create
 # ---------------------------
 # @param $1 - respresents a file name.
-# @description - creates file if it does not exsist.
+# @description - creates file if it does not exists.
 #
 util_file_create() {
   if [ ! -f $1 ]; then
@@ -75,6 +77,7 @@ util_file_create() {
 # @function util_get_plugin_dir
 # ------------------------------
 # @param $1 - represents path to pack directory.
+# @param $2 - represents command type, prune or upgrade.
 # @description
 #
 util_get_plugin_dir() {
@@ -204,7 +207,7 @@ config_array_filter_assign() {
 # --------------------------
 # @function env_process_cli
 # --------------------------
-# @param $1 - represents command type: init | install | help
+# @param $1 - represents command type: init | install | help | prune | upgrade
 # @param $2 - represents command option(s)
 # @description - case statement that manages cli commands and command options.
 #
