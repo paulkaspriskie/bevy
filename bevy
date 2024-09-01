@@ -84,7 +84,7 @@ util_get_plugin_dir() {
   find "$1" -type d | while read -r dir; do
     base=$(basename "${dir}")
     if [ "$base" = "start" ] && [ "$2" = "prune" ] || [ "$base" = "opt" ] && [ "$2" = "prune" ]; then
-      echo $dir
+      util_prune_package $dir
     fi
     if [ "$base" = "start" ] && [ "$2" = "upgrade" ] || [ "$base" = "opt" ] && [ "$2" = "upgrade" ]; then
       util_update_package $dir
@@ -100,9 +100,16 @@ util_get_plugin_dir() {
 # @description
 #
 util_prune_package() {
+  ARRAY_TEST=$(sed -n '/\[start\]/,/^$/{//!p;}' $FILE_CONFIG)
   for DIR_PLUGIN in "$1"/*; do
     if [ -d $DIR_PLUGIN ]; then
-      echo "$DIR_PLUGIN"
+      for element in $ARRAY_TEST; do
+        plugin_name=$(basename "${DIR_PLUGIN}")
+        element_name="$(basename "${element}")"
+        if [ $plugin_name = $element_name ]; then
+          echo true
+        fi
+      done
     fi
   done
 }
