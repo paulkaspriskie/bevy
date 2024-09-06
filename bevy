@@ -100,7 +100,8 @@ util_get_plugin_dir() {
 # @description
 #
 util_prune_package() {
-  ARRAY_TEST=$(sed -n '/\[start\]/,/^$/{//!p;}' $FILE_CONFIG)
+  ARRAY_TEST=$(sed -n '/^[^\[]/p; /^[^\]]$/p' $FILE_CONFIG)
+
   for DIR_PLUGIN in "$1"/*; do
     if [ -d $DIR_PLUGIN ]; then
       for element in $ARRAY_TEST; do
