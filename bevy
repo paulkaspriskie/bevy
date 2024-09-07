@@ -18,7 +18,7 @@ DIR_VIM_OPT="$HOME/.bevy/pack/${CLI_ARG_CMD_DIR:-plugins}/opt"
 FILE_CONFIG=$HOME/.bevyrc
 TERMINAL_COLOR_GREEN='\033[0;32m'
 TERMINAL_COLOR_NONE='\033[0m'
-ARRAY_TEST=$(sed -n '/^\[.*\]$/,/^$/ { /^[^[]/p }' $FILE_CONFIG)
+CONFIG_PLUGIN_ARRAY=$(sed -n '/^\[.*\]$/,/^$/ { /^[^[]/p }' $FILE_CONFIG)
 
 
 # --------------------------
@@ -101,23 +101,24 @@ util_get_plugin_dir() {
 # @description
 #
 util_prune_package() {
-  for DIR_PLUGIN in "$1"/*; do
-    if [ -d $DIR_PLUGIN ]; then
-      found=false
+  for PLUGIN_DIR_PATH in "$1"/*; do
+    if [ -d $PLUGIN_DIR_PATH ]; then
+      CONFIG_NAME_EXISTS=false
 
-      for element in $ARRAY_TEST; do
-        element_name="$(basename "${element}")"
-        plugin_name=$(basename "${DIR_PLUGIN}")
+      for CONFIG_ITEM in $CONFIG_PLUGIN_ARRAY; do
 
-        if [ $plugin_name = $element_name ]; then
-          found=true
+        CONFIG_PLUGIN_NAME="$(basename "${CONFIG_ITEM}")"
+        DIR_PLUGIN_NAME=$(basename "${PLUGIN_DIR_PATH}")
+
+        if [ $CONFIG_PLUGIN_NAME = $DIR_PLUGIN_NAME ]; then
+          CONFIG_NAME_EXISTS=true
           break
         fi
 
       done
 
-      if [ "$found" = false ]; then
-        rm -rf $DIR_PUGIN
+      if [ "$CONFIG_NAME_EXISTS" = false ]; then
+        rm -rf $PLUGIN_DIR_PATH
       fi
     fi
   done
