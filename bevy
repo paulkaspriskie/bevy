@@ -17,6 +17,7 @@ DIR_VIM_START="$HOME/.bevy/pack/${CLI_ARG_CMD_DIR:-plugins}/start"
 DIR_VIM_OPT="$HOME/.bevy/pack/${CLI_ARG_CMD_DIR:-plugins}/opt"
 FILE_CONFIG=$HOME/.bevyrc
 TERMINAL_COLOR_GREEN='\033[0;32m'
+TERMINAL_COLOR_RED='\033[31m'
 TERMINAL_COLOR_NONE='\033[0m'
 CONFIG_PLUGIN_ARRAY=$(sed -n '/^\[.*\]$/,/^$/ { /^[^[]/p }' $FILE_CONFIG)
 
@@ -118,7 +119,7 @@ util_prune_package() {
       done
 
       if [ "$CONFIG_NAME_EXISTS" = false ]; then
-        rm -rf $PLUGIN_DIR_PATH
+        rm -rf $PLUGIN_DIR_PATH && echo "${TERMINAL_COLOR_RED} Plugin deleted: $PLUGIN_DIR_PATH ${TERMINAL_COLOR_NONE}"
       fi
     fi
   done
