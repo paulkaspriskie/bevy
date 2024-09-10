@@ -19,7 +19,7 @@ curl https://raw.githubusercontent.com/paulkaspriskie/bevy/main/util/install.sh 
 ```shell 
 bevy init
 ```
-> creates configuration file (.bevyrc) in $HOME directory
+<sup>Creates .bevyrc configuration file in $HOME directory.</sup>
 
 <br/>
 
@@ -27,7 +27,7 @@ bevy init
 ```shell 
 bevy install
 ```
-> installs all vim plugins specified in .bevyrc file.
+<sup>Installs all vim plugins specified in .bevyrc file.</sup> 
 
 <br/>
 
@@ -35,10 +35,25 @@ bevy install
 ```shell 
 bevy prune
 ```
-> removes any vim plugins that are no longer specified in .bevyrc file.
+<sup>Removes any vim plugins that are no longer specified in .bevyrc file.</sup>
+
+<br/>
 
 ### Bevy upgrade
 ```shell 
 bevy upgrade
 ```
-> upgrades all vim plugins specified in .bevyrc file.
+<sup>Upgrades all vim plugins specified in .bevyrc file.</sup>
+
+<br/>
+
+## .bevyrc file configuration
+```
+[start]
+tpope/vim-vinegar
+airblade/vim-gitgutter
+morhetz/gruvbox
+
+[opt]
+tpope/vim-fugitive
+```
