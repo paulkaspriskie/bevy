@@ -55,7 +55,13 @@ util_dir_update() {
 # @description - dynamically builds git clone specified by first argument.
 #
 util_clone_build() {
-  git clone "https://github.com/$1.git" && echo "${TERMINAL_COLOR_GREEN}Clone Success: $1${TERMINAL_COLOR_NONE}"
+  PROJECT_NAME=$(basename "${1}")
+
+  if [ ! -d "$HOME/.bevy/pack/plugins/$2/$PROJECT_NAME" ]; then
+    git clone "https://github.com/$1.git" && echo "${TERMINAL_COLOR_GREEN}Clone Success: $1${TERMINAL_COLOR_NONE}"
+  else
+    echo "Pugin $PROJECT_NAME is already installed. Skipping installation..."
+  fi
 }
 
 
@@ -155,10 +161,10 @@ util_shell_execute() {
 
   for i in "$@"; do
     if [ $TYPE = "start" ]; then
-      util_dir_create $DIR_VIM_START && util_dir_update $DIR_VIM_START && util_clone_build $i
+      util_dir_create $DIR_VIM_START && util_dir_update $DIR_VIM_START && util_clone_build $i $TYPE
     fi
     if [ $TYPE = "opt" ]; then
-      util_dir_create $DIR_VIM_OPT && util_dir_update $DIR_VIM_OPT && util_clone_build $i
+      util_dir_create $DIR_VIM_OPT && util_dir_update $DIR_VIM_OPT && util_clone_build $i $TYPE
     fi
   done
 }
