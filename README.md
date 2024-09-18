@@ -14,7 +14,7 @@ curl https://raw.githubusercontent.com/paulkaspriskie/bevy/main/util/install.sh 
 
 ## Commands
 | Command | Description |
-| ------- | ----------- |
+| :------ | :---------- |
 | `bevy init` | Creates .bevyrc configuration file in $HOME directory. |
 | `bevy install` | Installs all vim plugins specified in .bevyrc file. |
 | `bevy prune` | Removes all vim plugins that are no longer specified in .bevyrc file. |
@@ -32,3 +32,5 @@ morhetz/gruvbox
 [opt]
 tpope/vim-fugitive
 ```
+
+> [!NOTE]
