@@ -24,12 +24,18 @@ curl https://raw.githubusercontent.com/paulkaspriskie/bevy/main/util/install.sh 
 <br/>
 
 ## Configuration
-```
-[start]
-tpope/vim-vinegar
-airblade/vim-gitgutter
-morhetz/gruvbox
-
-[opt]
-tpope/vim-fugitive
-```
+> [!NOTE]  
+>  
+>  Example .bevyrc file
+>  ```
+>  [start]
+>  tpope/vim-vinegar
+>  airblade/vim-gitgutter
+>  morhetz/gruvbox
+>  
+>  [opt]
+>  tpope/vim-fugitive
+>  ```
+>  
+>  - `[start]` - Installs all plugins listed in ~/.vim/pack/plugins/start directory.
+>  - `[opt]` - Installs all plugins listed in ~/.vim/pack/plugins/opt directory
