@@ -2,6 +2,7 @@
 A shell based vim plugin manager and bulk installer (CLI).
 - [Installation](#installation)
 - [Commands](#commands)
+- [Configuration](#configuration)
 
 <br/>
 
@@ -22,7 +23,7 @@ curl https://raw.githubusercontent.com/paulkaspriskie/bevy/main/util/install.sh 
 
 <br/>
 
-## .bevyrc file configuration
+## Configuration
 ```
 [start]
 tpope/vim-vinegar
@@ -32,5 +33,3 @@ morhetz/gruvbox
 [opt]
 tpope/vim-fugitive
 ```
-
-> [!NOTE]
