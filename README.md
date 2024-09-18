@@ -1,7 +1,7 @@
 # Bevy
 A shell based vim plugin manager and bulk installer (CLI).
 - [Installation](#installation)
-- [Basic Usage](#basic-cli-usage)
+- [Commands](#commands)
 
 <br/>
 
@@ -12,8 +12,7 @@ curl https://raw.githubusercontent.com/paulkaspriskie/bevy/main/util/install.sh 
 
 <br/>
 
-## Basic CLI Usage
-### Bevy init
+## Commands
 | Command | Description |
 | ------- | ----------- |
 | `bevy init` | Creates .bevyrc configuration file in $HOME directory. |
