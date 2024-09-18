@@ -6,8 +6,6 @@ A shell based vim plugin manager and bulk installer (CLI).
 <br/>
 
 ## Installation
-### Manual Install
-
 ```shell
 curl https://raw.githubusercontent.com/paulkaspriskie/bevy/main/util/install.sh | sh
 ```
@@ -16,34 +14,12 @@ curl https://raw.githubusercontent.com/paulkaspriskie/bevy/main/util/install.sh 
 
 ## Basic CLI Usage
 ### Bevy init
-```shell 
-bevy init
-```
-<sup>Creates .bevyrc configuration file in $HOME directory.</sup>
-
-<br/>
-
-### Bevy install 
-```shell 
-bevy install
-```
-<sup>Installs all vim plugins specified in .bevyrc file.</sup> 
-
-<br/>
-
-### Bevy prune
-```shell 
-bevy prune
-```
-<sup>Removes any vim plugins that are no longer specified in .bevyrc file.</sup>
-
-<br/>
-
-### Bevy upgrade
-```shell 
-bevy upgrade
-```
-<sup>Upgrades all vim plugins specified in .bevyrc file.</sup>
+| Command | Description |
+| ------- | ----------- |
+| `bevy init` | Creates .bevyrc configuration file in $HOME directory. |
+| `bevy install` | Installs all vim plugins specified in .bevyrc file. |
+| `bevy prune` | Removes all vim plugins that are no longer specified in .bevyrc file. |
+| `bevy prune` | Upgrades all vim plugins specified in .bevyrc file. |
 
 <br/>
 
